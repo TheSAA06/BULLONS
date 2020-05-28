@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		.div{
+			height: 100px;
+			width: 100px;
+			position: absolute;
+		}
+		.win{
+			width: 200px;
+			height: 100px;
+			margin-right: auto;
+			margin-left: auto;
+			display: none;
+		}
+		.lose{
+			width: 200px;
+			height: 100px;
+			margin-right: auto;
+			margin-left: auto;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Очки: <span class="score"></span></h1>
+		<div class="divminus div bg-danger rounded-circle"></div>
+		<div class="divminus div bg-danger rounded-circle"></div>
+		<div class="divdipper div" style="background-image: url(dipper.jpg); background-size: 100% 100%;"></div>
+		<div class="divdipper2 div" style="background-image: url(dipper2.jpg); background-size: 100% 100%;"></div>
+		<div class="divsvinka div" style="background-image: url(svinka.jpg); background-size: 100% 100%;"></div>
+		<div class="divstarik div" style="background-image: url(starik.png); background-size: 100% 100%;"></div>
+		<div class="divgnom div" style="background-image: url(gnom.png); background-size: 100% 100%;"></div>
+		<div class="divpinkghost div" style="background-image: url(pinkghost.gif); background-size: 100% 100%;"></div>
+		<div class="divpurpleghost div" style="background-image: url(purpleghost.gif); background-size: 100% 100%;"></div>
+		<div class="divredghost div" style="background-image: url(redghost.gif); background-size: 100% 100%;"></div>
+		<div class="divpacman div" style="background-image: url(pacman.png); background-size: 100% 100%;"></div>
+		<div class="divbabypacman div" style="background-image: url(babtpacman.jpg); background-size: 100% 100%;"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+		<div class="div bg-danger rounded-circle"></div>
+	</div>
+	<div class="win bg-dark"><h1 class="text-light">Ты победил</h1></div>
+	<div class="lose bg-dark"><h1 class="text-light">Проиграл</h1></div>
+
+	<script type="text/javascript">
+		alert('Нажми чтоб начать');
+		let box = document.querySelectorAll('.div');
+		let boxminus = document.querySelectorAll('.divminus');
+		let point = 0;
+		let divdipper = document.querySelector('.divdipper');
+		let divdipper2 = document.querySelector('.divdipper2');
+		let divsvinka = document.querySelector('.divsvinka');
+		let divstarik = document.querySelector('.divstarik');
+		let divgnom = document.querySelector('.divgnom');
+		let divpinkghost = document.querySelector('.divpinkghost');
+		let divpurpleghost = document.querySelector('.divpurpleghost');
+		let divredghost = document.querySelector('.divredghost');
+		let divpacman = document.querySelector('.divpacman');
+		let divbabypacman = document.querySelector('.divbabypacman');
+		let cont = document.querySelector('.container');
+		let scores = document.querySelector('.score');
+		let win = document.querySelector('.win');
+		let lose = document.querySelector('.lose');
+		scores.innerHTML = point;
+		let randLeft = function() {
+			let num = Math.random() * 1780;
+			let roundNum = Math.round(num);
+			return roundNum;
+		}
+		let randTop = function() {
+			let num = Math.random() * 870;
+			let roundNum = Math.round(num);
+			return roundNum;
+		}
+		
+		for (let i = 0; i < 22; i++) {
+			let boxs = {
+				left : randLeft() + "px",
+				top : randTop() + "px"
+			}
+			box[i].style.left = boxs.left;
+			box[i].style.top = boxs.top;
+			box[i].onclick = function() {
+				point++;
+				scores.innerHTML = point;
+				box[i].style.display = 'none';
+			}
+			divredghost.onclick = function() {
+				cont.style.opacity = 0;
+				cont.style.transition = '1s';
+				lose.style.display = 'block';
+			}
+			divpacman.onclick = function() {
+				point = point + 2;
+				scores.innerHTML = point;
+				divpacman.style.display = 'none';
+			}
+			divpinkghost.onclick = function() {
+				point = point - 1;
+				scores.innerHTML = point;
+				divpinkghost.style.display = 'none';
+			}
+			divpurpleghost.onclick = function() {
+				point = point - 2;
+				scores.innerHTML = point;
+				divpurpleghost.style.display = 'none';
+			}
+			divstarik.onclick = function() {
+				point = point + 5;
+				scores.innerHTML = point;
+				divstarik.style.display = 'none';
+			}
+			divsvinka.onclick = function() {
+				point = point - 5;
+				scores.innerHTML = point;
+				divsvinka.style.display = 'none';
+			}
+				for (let i = 0; i < 1; i++) {
+					boxminus[i].onclick = function() {
+					point--;
+					scores.innerHTML = point;
+					boxminus[i].style.display = 'none';
+				}
+			}
+			
+		}
+		let stop = function() {
+			if (point >= 10) {
+				cont.style.opacity = 0;
+				cont.style.transition = '1s';
+				win.style.display = 'block';
+			}
+			if (point < 10) {
+				cont.style.opacity = 0;
+				cont.style.transition = '1s';
+				lose.style.display = 'block';
+			}
+		}
+		
+		setTimeout(stop, 7000)
+	</script>
+</body>
+</html>
